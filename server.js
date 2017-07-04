@@ -1,4 +1,7 @@
 const express = require('express');
+const mongodb = require('mongodb');
+
+const db = require('./data/db');
 
 var port = process.env.PORT || 3000;
 var app = express();
@@ -6,7 +9,7 @@ var app = express();
 app.use(express.static('/public'));
 
 app.get('/', (req, res) => {
-  res.send('Server is up!');
+  res.send(db.find().toString());
 });
 
 app.listen(port, () => {
