@@ -6,10 +6,8 @@ const db = require('./data/db');
 var port = process.env.PORT || 3000;
 var app = express();
 
-app.use(express.static('/public'));
-
 app.get('/', (req, res) => {
-  
+  res.status(200).send(db);
 });
 
 app.listen(port, () => {
