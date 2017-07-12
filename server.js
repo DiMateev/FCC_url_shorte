@@ -26,7 +26,7 @@ app.get('/new/:url*', async (req, res) => {
 });
 
 app.get('/:id', async (req, res) => {
-  const shortUrl = `${req.headers.host}/${req.params.id}`;
+  const shortUrl = `https://${req.headers.host}/${req.params.id}`;
   MongoClient.connect(dbAddress, async (err, db) => {
     if (err) throw new Error();
     const urls = db.collection('urls');
