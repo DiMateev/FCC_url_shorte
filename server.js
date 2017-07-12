@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/new/:url*', async (req, res) => {
   const url = req.params.url + req.params[0];
+  if (!isURL(url)) {
+    return res.send({error: 'Provided url is not valid. Please try again.'});
+  }
   try {
     const urlsObj = await createShortLink(req.headers.host, url);
     res.send(urlsObj);
@@ -28,7 +31,11 @@ app.get('/:id', async (req, res) => {
     if (err) throw new Error();
     const urls = db.collection('urls');
     var url = await urls.findOne({short_url: shortUrl});
-    res.redirect(url.original_url);
+    if (url) {
+      res.redirect(url.original_url);
+    } else {
+      res.send({error: `${shortUrl} does NOT exist in our database!`})
+    }    
   });
 });
 
