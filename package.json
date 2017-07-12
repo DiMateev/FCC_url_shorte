@@ -10,7 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "is-url": "^1.2.2",
     "mongodb": "^2.2.29"
   }
 }

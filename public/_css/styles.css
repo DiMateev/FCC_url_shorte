@@ -1,0 +1,50 @@
+body, h1, h2, h3, h4, ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  color: green;
+  margin: 30px;
+  text-align: center;
+}
+
+h2, h3, h4 {
+  margin: 10px;
+}
+
+h2 {font-size: 1.8em;}
+h3, h4 {font-size: 1.4em;}
+
+li {
+  margin-left: 20px;
+}
+
+.user-story {
+  list-style: disc;
+  list-style: inside;
+  padding: 10px;
+  font-size: 1.2em;
+}
+
+.example-usage {
+  display: inline-block;
+  margin: 3px;
+  padding: 3px 6px;
+  background-color: rgba(255,0,0,.05);
+  color: rgb(155,10,10);
+}
+
+.example {
+  width: 40vw;
+  margin: 10px auto;
+  padding: 20px 30px 30px 20px;
+  background: rgba(0,255,0,.2);
+  border-radius: 5px;
+  box-shadow: 0 2px 3px grey;
+}

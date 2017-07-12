@@ -1,13 +1,35 @@
 const express = require('express');
-const mongodb = require('mongodb');
+const bodyParser = require('body-parser');
+const isURL = require('is-url');
+const {MongoClient} = require('mongodb');
 
-const db = require('./data/db');
+const {createShortLink} = require('./utils/app');
 
-var port = process.env.PORT || 3000;
 var app = express();
+const port = process.env.PORT || 3000;
+const dbAddress = process.env.MONGODB_URI || 'mongodb://localhost:27017/url-shorte';
 
-app.get('/', (req, res) => {
-  res.status(200).send(db);
+app.use(express.static('public/'));
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.get('/new/:url*', async (req, res) => {
+  const url = req.params.url + req.params[0];
+  try {
+    const urlsObj = await createShortLink(req.headers.host, url);
+    res.send(urlsObj);
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+
+app.get('/:id', async (req, res) => {
+  const shortUrl = `${req.headers.host}/${req.params.id}`;
+  MongoClient.connect(dbAddress, async (err, db) => {
+    if (err) throw new Error();
+    const urls = db.collection('urls');
+    var url = await urls.findOne({short_url: shortUrl});
+    res.redirect(url.original_url);
+  });
 });
 
 app.listen(port, () => {
