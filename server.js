@@ -18,7 +18,7 @@ app.get('/new/:url*', async (req, res) => {
     return res.send({error: 'Provided url is not valid. Please try again.'});
   }
   try {
-    const urlsObj = await createShortLink(req.headers.host, url);
+    const urlsObj = await createShortLink(req.protocol, req.headers.host, url);
     res.send(urlsObj);
   } catch (e) {
     res.status(400).send(e);

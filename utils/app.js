@@ -7,10 +7,10 @@ const generateNumber = () => {
   return Math.floor(Math.random() * 9000 + 1000);
 }
 
-const createShortLink = async (host, url) => {
+const createShortLink = async (protocol, host, url) => {
   const obj = {
     original_url: url,
-    short_url: `https://${host}/${generateNumber()}`
+    short_url: `${protocol}://${host}/${generateNumber()}`
   };
   try {
     await saveToMongo(obj);
