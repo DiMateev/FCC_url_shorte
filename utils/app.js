@@ -10,7 +10,7 @@ const generateNumber = () => {
 const createShortLink = async (host, url) => {
   const obj = {
     original_url: url,
-    short_url: `${host}/${generateNumber()}`
+    short_url: `https://${host}/${generateNumber()}`
   };
   try {
     await saveToMongo(obj);
